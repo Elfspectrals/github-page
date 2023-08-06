@@ -4,6 +4,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import App from './App';
 import ShowCase from "./3D/ShowCase/ShowCase";
 import Contact from './Contact/Contact';
+import ThreeJS from './ThreeJS';
 
 //Route des jeux
 import Game from './Game/Game';
@@ -22,14 +23,15 @@ const Header = () => {
                 </div>
                 <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
                     <div className="text-sm lg:flex-grow flex justify-evenly">
-                        <Link to="/" className="block mt-4 lg:inline-block lg:mt-0 text-6xl">
-                            🏡
-                        </Link>
+                        
                         <Link to="/showCase" className="block mt-4 lg:inline-block lg:mt-0 text-6xl">
                         💡
                         </Link>
                         <Link to='/game'  className='block mt-4 lg:inline-block lg:mt-0 text-6xl'>
                         🎮
+                        </Link>
+                        <Link to ="/ThreeJS" className='block mt-4 lg:inline-block lg:mt-0 text-6xl'>
+                        🚀
                         </Link>
                         <Link to="/contact" className='block mt-4 lg:inline-block lg:mt-0 text-6xl'>
                             ✉️
@@ -40,7 +42,7 @@ const Header = () => {
             <br />
             <Routes>
                 {/* Redirige vers Page Principale */}
-                <Route path='/' element={<App />} />
+                <Route path='/home' element={<App />} />
 
                 {/* Redirige vers la partie modélisation 3D  */}
                 <Route path="/showCase" element={<ShowCase />} />
@@ -52,7 +54,8 @@ const Header = () => {
                 <Route path='/game' element={<Game/>} />
                     <Route path='/Morpion' element={<Morpion />} />
 
-            
+                <Route path='/ThreeJS' element= { <ThreeJS/>} />
+
             </Routes>
         </div>
     );

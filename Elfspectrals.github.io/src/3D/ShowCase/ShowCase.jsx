@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GUI } from 'dat.gui';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 function ShowCase() {
   const canvasRef = useRef(null);
@@ -15,8 +14,10 @@ function ShowCase() {
       scene = new THREE.Scene();
       camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
       renderer = new THREE.WebGLRenderer({ canvas: canvasRef.current });
-      renderer.setSize(window.innerWidth, window.innerHeight );
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
       scene.background = new THREE.Color('#FFA500');
+
 
 
       if (selectedScene === 'scene1') {
@@ -36,10 +37,11 @@ function ShowCase() {
         const guiDomElement = gui.domElement;
         guiDomElement.style.border = '5px solid orange';
         guiDomElement.style.position = 'relative ';
-        guiDomElement.style.top = '30vh';
+        guiDomElement.style.top = '50vh';
         guiDomElement.style.right = '3vw';
 
-    
+
+
         gui.add(cube.rotation, 'x', 0, Math.PI).name('rotation');
         gui.add(cube.scale, 'y', 1, 5, 0.1).name('Scaling');
         const materialParams = {
@@ -49,9 +51,10 @@ function ShowCase() {
         gui.addColor(materialParams, 'cubeColor').onChange((value) => cube.material.color.set(value));
 
       } else if (selectedScene === 'scene2') {
-        
-        const geometry = new THREE.BoxGeometry(1, 1, 1);
-        const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+
+        const geometry = new THREE.CylinderGeometry(0.5, 1, 1);
+        const material = new THREE.MeshBasicMaterial({ color: 'grey' });
+
         cube = new THREE.Mesh(geometry, material);
         scene.add(cube);
 
@@ -65,9 +68,9 @@ function ShowCase() {
         const guiDomElement = gui.domElement;
         guiDomElement.style.border = '5px solid orange';
         guiDomElement.style.position = 'relative ';
-        guiDomElement.style.top = '30vh';
+        guiDomElement.style.top = '50vh';
         guiDomElement.style.right = '3vw';
-        
+
 
         gui.add(cube.rotation, 'y', 0, Math.PI).name('rotation');
         gui.add(cube.scale, 'x', 1, 5, 0.1).name('Scaling');

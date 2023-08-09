@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link, Route, Routes } from "react-router-dom";
 
-import App from './App';
 import ShowCase from "./3D/ShowCase/ShowCase";
 import Contact from './Contact/Contact';
+import Error from './Error';
 import ThreeJS from './ThreeJS';
+import Home from './Home';
 
 //Route des jeux
 import Game from './Game/Game';
@@ -41,8 +42,7 @@ const Header = () => {
             </nav>
             <br />
             <Routes>
-                {/* Redirige vers Page Principale */}
-                <Route path='/home' element={<App />} />
+                <Route path='/github-page' element={<Home/>} />
 
                 {/* Redirige vers la partie modélisation 3D  */}
                 <Route path="/showCase" element={<ShowCase />} />
@@ -54,8 +54,12 @@ const Header = () => {
                 <Route path='/game' element={<Game/>} />
                     <Route path='/Morpion' element={<Morpion />} />
 
+                {/* Redirige vers la modélisation 3D */}
                 <Route path='/ThreeJS' element= { <ThreeJS/>} />
 
+                {/* Redirige vers page 404 */}
+                <Route path='*' element={<Error />} />
+            
             </Routes>
         </div>
     );

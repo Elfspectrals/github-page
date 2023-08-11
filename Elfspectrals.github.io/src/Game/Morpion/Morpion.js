@@ -1,24 +1,102 @@
 import React, { useState } from 'react';
 import './Morpion.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Morpion = () => {
+  const [board, setBoard] = useState(Array(9).fill(''));
+  const [joueur, setJoueur] = useState('La nouvelle tête de la boîte joue');
+
+  const handleCellClick = (index) => {
+    if (board[index] !== '') {
+      toast.error('Eh oh on joue pas sur la case des autres! 😠', {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    } else {
+      const updatedBoard = [...board];
+      updatedBoard[index] = joueur === 'La nouvelle tête de la boîte joue' ? '🧑‍💻' : '🎮';
+      setBoard(updatedBoard);
+      setJoueur(joueur === 'La nouvelle tête de la boîte joue' ? 'Le futur alternant joue' : 'La nouvelle tête de la boîte joue');
+
+      checkWinner(updatedBoard); // Vérification du gagnant après chaque coup
+    }
+  };
+
+  const checkWinner = (currentBoard) => {
+    const winningCombinations = [
+      [0, 1, 2], // lignes horizontales
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6], // lignes verticales
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8], // diagonales
+      [2, 4, 6],
+    ];
+
+    for (let i = 0; i < winningCombinations.length; i++) {
+      const [a, b, c] = winningCombinations[i];
+      if (
+        currentBoard[a] !== '' &&
+        currentBoard[a] === currentBoard[b] &&
+        currentBoard[a] === currentBoard[c]
+      ) {
+        toast.success(`Le joueur ${joueur} a gagné ! 🎉`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+        // Réinitialisation du jeu après la victoire
+        setBoard(Array(9).fill(''));
+        setJoueur('La nouvelle tête de la boîte joue');
+        return;
+      }
+    }
+
+    // Vérification d'un match nul
+    if (!currentBoard.includes('')) {
+      toast.info("Match nul ! 🙃", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      // Réinitialisation du jeu après un match nul
+      setBoard(Array(9).fill(''));
+      setJoueur('La nouvelle tête de la boîte joue');
+    }
+  };
+
   return (
     <div>
-      <h4 className='text-center text-3xl text-yellow-600 underline font-semibold mb-4'>Morpion en construction 🏗️</h4>
-      <div className="board">
-        <div className="cell">1</div>
-        <div className="cell">2</div>
-        <div className="cell">3</div>
-        <div className="cell">4</div>
-        <div className="cell">5</div>
-        <div className="cell">6</div>
-        <div className="cell">7</div>
-        <div className="cell">8</div>
-        <div className="cell">9</div>
+      <ToastContainer />
+      <h4 className='text-center text-3xl text-yellow-300 underline font-semibold mb-4'>Morpion pour jouer avec un ami (ou seul )</h4>
+      <h2 className='text-center text-xl mb-4'>{joueur}</h2>
+      <div className="board ">
+        {board.map((cell, index) => (
+          <div key={index}  className="cell bg-slate-400 text-7xl" onClick={() => handleCellClick(index)}>
+            {cell}
+          </div>
+        ))}
       </div>
     </div>
   );
 };
 
-
-export default Morpion
+export default Morpion;

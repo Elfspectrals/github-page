@@ -6,11 +6,19 @@ const Contact = () => {
 
   const buttonAnimation = () => {
     const button = buttonRef.current;
-    button.classList.add("animate__fadeOut");
 
+    const sound = new Audio(`${process.env.PUBLIC_URL}/sound/MessageBoss.mp3`);
+
+    // Ajouter la classe d'animation de fadeOut
+    button.classList.add("animate__fadeOut");
+  
+    // Jouer le son
+    sound.play();
+  
     setTimeout(() => {
+      // Supprimer la classe d'animation de fadeOut
       button.classList.remove("animate__fadeOut");
-    }, 1500); // Change the delay (in milliseconds) as needed
+    }, 1500); // Modifier le délai (en millisecondes) si nécessaire
   };
 
   return (

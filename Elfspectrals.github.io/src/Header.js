@@ -10,6 +10,7 @@ import Home from './Home';
 //Route des jeux
 import Game from './Game/Game';
 import Morpion from './Game/Morpion/Morpion';
+import Phaser from './Game/Phaser/Phaser';
 
 
 const Header = () => {
@@ -53,6 +54,7 @@ const Header = () => {
                 {/* Redirige vers mes jeux */}
                 <Route path='/game' element={<Game/>} />
                     <Route path='/Morpion' element={<Morpion />} />
+                    <Route path='/Phaser' element={<Phaser />} />
 
                 {/* Redirige vers la modélisation 3D */}
                 <Route path='/ThreeJS' element= { <ThreeJS/>} />

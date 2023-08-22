@@ -15,9 +15,9 @@ const Game = () => {
                 <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
                     <div className="text-sm lg:flex-grow flex justify-evenly">
                         <Link to="/Morpion" className="block mt-4 lg:inline-block lg:mt-0 text-cyan-500 text-lg">
-                            Jeux 1 
+                            Morpion 
                         </Link>
-                        <Link to="/" className="block mt-4 lg:inline-block lg:mt-0 text-lg">
+                        <Link to="/Phaser" className="block mt-4 lg:inline-block lg:mt-0 text-lg">
                             Jeux 2
                         </Link>
                         <Link to="/" className="block mt-4 lg:inline-block lg:mt-0 text-lg">

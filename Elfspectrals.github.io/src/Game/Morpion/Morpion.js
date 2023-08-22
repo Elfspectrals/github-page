@@ -9,6 +9,9 @@ const Morpion = () => {
 
   const handleCellClick = (index) => {
     if (board[index] !== '') {
+      const sound = new Audio(`${process.env.PUBLIC_URL}/assets/sound/try-again.mp3`);
+
+      sound.play();
       toast.error('Eh oh on joue pas sur la case des autres! 😠', {
         position: "top-right",
         autoClose: 1000,
@@ -19,6 +22,7 @@ const Morpion = () => {
         progress: undefined,
         theme: "colored",
       });
+      
     } else {
       const updatedBoard = [...board];
       updatedBoard[index] = joueur === 'La nouvelle tête de la boîte joue' ? '🧑‍💻' : '🎮';
@@ -30,6 +34,7 @@ const Morpion = () => {
   };
 
   const checkWinner = (currentBoard) => {
+    
     const winningCombinations = [
       [0, 1, 2], // lignes horizontales
       [3, 4, 5],
@@ -58,6 +63,9 @@ const Morpion = () => {
           progress: undefined,
           theme: "colored",
         });
+        const sound = new Audio(`${process.env.PUBLIC_URL}/assets/sound/pvz-winning-music.mp3`);
+
+      sound.play();
         // Réinitialisation du jeu après la victoire
         setBoard(Array(9).fill(''));
         setJoueur('La nouvelle tête de la boîte joue');
@@ -67,6 +75,7 @@ const Morpion = () => {
 
     // Vérification d'un match nul
     if (!currentBoard.includes('')) {
+      
       toast.info("Match nul ! 🙃", {
         position: "top-right",
         autoClose: 5000,
@@ -77,6 +86,10 @@ const Morpion = () => {
         progress: undefined,
         theme: "colored",
       });
+      const sound = new Audio(`${process.env.PUBLIC_URL}/assets/sound/minecraft-villager-sound-effect.mp3`);
+      sound.play();
+
+      
       // Réinitialisation du jeu après un match nul
       setBoard(Array(9).fill(''));
       setJoueur('La nouvelle tête de la boîte joue');

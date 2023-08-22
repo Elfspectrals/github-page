@@ -7,13 +7,12 @@ const Contact = () => {
   const buttonAnimation = () => {
     const button = buttonRef.current;
 
-    const sound = new Audio(`${process.env.PUBLIC_URL}/sound/MessageBoss.mp3`);
+    const sound = new Audio(`${process.env.PUBLIC_URL}/assets/sound/MessageBoss.mp3`);
 
+    sound.play();
     // Ajouter la classe d'animation de fadeOut
     button.classList.add("animate__fadeOut");
   
-    // Jouer le son
-    sound.play();
   
     setTimeout(() => {
       // Supprimer la classe d'animation de fadeOut
